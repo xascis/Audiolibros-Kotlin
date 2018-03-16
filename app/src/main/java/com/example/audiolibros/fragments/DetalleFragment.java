@@ -22,8 +22,7 @@ import com.example.audiolibros.R;
 import java.io.IOException;
 
 public class DetalleFragment extends Fragment implements
-        View.OnTouchListener, MediaPlayer.OnPreparedListener,
-        MediaController.MediaPlayerControl {
+        View.OnTouchListener, MediaPlayer.OnPreparedListener, MediaController.MediaPlayerControl {
     public static String ARG_ID_LIBRO = "id_libro";
     MediaPlayer mediaPlayer;
     MediaController mediaController;

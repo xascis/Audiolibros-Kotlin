@@ -85,7 +85,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 }
                 adaptador!!.notifyDataSetChanged()
             }
-
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
         })
@@ -110,21 +109,34 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        if (id == R.id.menu_preferencias) {
-            Toast.makeText(this, "Preferencias", Toast.LENGTH_LONG).show()
-            return true
-        } else if (id == R.id.menu_acerca) {
-            val builder = AlertDialog.Builder(this)
-            builder.setMessage("Mensaje de Acerca De")
-            builder.setPositiveButton(android.R.string.ok, null)
-            builder.create().show()
-            return true
+//        if (id == R.id.menu_preferencias) {
+//            Toast.makeText(this, "Preferencias", Toast.LENGTH_LONG).show()
+//            return true
+//        } else if (id == R.id.menu_acerca) {
+//            val builder = AlertDialog.Builder(this)
+//            builder.setMessage("Mensaje de Acerca De")
+//            builder.setPositiveButton(android.R.string.ok, null)
+//            builder.create().show()
+//            return true
+//        }
+        when(id){
+            R.id.menu_preferencias -> {
+                Toast.makeText(this, "Preferencias", Toast.LENGTH_LONG).show()
+                return true
+            }
+            R.id.menu_acerca -> {
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Mensaje de Acerca De")
+                builder.setPositiveButton(android.R.string.ok, null)
+                builder.create().show()
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }
 
     fun mostrarDetalle(id: Int) {
-        val detalleFragment = fragmentManager.findFragmentById(R.id.detalle_fragment) as DetalleFragment
+        val detalleFragment = fragmentManager.findFragmentById(R.id.detalle_fragment) as? DetalleFragment
         if (detalleFragment != null) {
             detalleFragment.ponInfoLibro(id)
         } else {
@@ -132,12 +144,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val args = Bundle()
             args.putInt(DetalleFragment.ARG_ID_LIBRO, id)
             nuevoFragment.arguments = args
-            val transaccion = fragmentManager
-                    .beginTransaction()
+            val transaccion = fragmentManager.beginTransaction()
             transaccion.replace(R.id.contenedor_pequeno, nuevoFragment)
             transaccion.addToBackStack(null)
             transaccion.commit()
         }
+
         val pref = getSharedPreferences(
                 "com.example.audiolibros_internal", Context.MODE_PRIVATE)
         val editor = pref.edit()
@@ -158,20 +170,38 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        // WIP: cambiar if por when aquí:
-        if (id == R.id.nav_todos) {
-            adaptador!!.setGenero("")
-            adaptador!!.notifyDataSetChanged()
-        } else if (id == R.id.nav_epico) {
-            adaptador!!.setGenero(G_EPICO)
-            adaptador!!.notifyDataSetChanged()
-        } else if (id == R.id.nav_XIX) {
-            adaptador!!.setGenero(G_S_XIX)
-            adaptador!!.notifyDataSetChanged()
-        } else if (id == R.id.nav_suspense) {
-            adaptador!!.setGenero(G_SUSPENSE)
-            adaptador!!.notifyDataSetChanged()
+//        if (id == R.id.nav_todos) {
+//            adaptador!!.setGenero("")
+//            adaptador!!.notifyDataSetChanged()
+//        } else if (id == R.id.nav_epico) {
+//            adaptador!!.setGenero(G_EPICO)
+//            adaptador!!.notifyDataSetChanged()
+//        } else if (id == R.id.nav_XIX) {
+//            adaptador!!.setGenero(G_S_XIX)
+//            adaptador!!.notifyDataSetChanged()
+//        } else if (id == R.id.nav_suspense) {
+//            adaptador!!.setGenero(G_SUSPENSE)
+//            adaptador!!.notifyDataSetChanged()
+//        }
+        when(id) {
+            R.id.nav_todos -> {
+                adaptador!!.setGenero("")
+                adaptador!!.notifyDataSetChanged()
+            }
+            R.id.nav_epico -> {
+                adaptador!!.setGenero(G_EPICO)
+                adaptador!!.notifyDataSetChanged()
+            }
+            R.id.nav_XIX -> {
+                adaptador!!.setGenero(G_S_XIX)
+                adaptador!!.notifyDataSetChanged()
+            }
+            R.id.nav_suspense -> {
+                adaptador!!.setGenero(G_SUSPENSE)
+                adaptador!!.notifyDataSetChanged()
+            }
         }
+
 //        val drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
