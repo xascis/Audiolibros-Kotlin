@@ -61,7 +61,7 @@ public class AdaptadorLibros extends
         //holder.portada.setImageResource(libro.recursoImagen);
         holder.titulo.setText(libro.getTitulo());
         Aplicacion aplicacion = (Aplicacion) contexto.getApplicationContext();
-        aplicacion.getLectorImagenes().get(libro.getUrlImagen(),
+        aplicacion.lectorImagenes().get(libro.getUrlImagen(),
                 new ImageLoader.ImageListener() {
                     @Override public void onResponse(ImageLoader.ImageContainer
                                                              response, boolean isImmediate) {
