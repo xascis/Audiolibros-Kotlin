@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //    private var appBarLayout: AppBarLayout? = null
 //    private var tabs: TabLayout? = null
 //    private var drawer: DrawerLayout? = null
-    private var toggle: ActionBarDrawerToggle? = null
+    private lateinit var toggle: ActionBarDrawerToggle // private var toggle: ActionBarDrawerToggle? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,30 +60,30 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         // Pestañas
 //        tabs = findViewById<View>(R.id.tabs) as TabLayout
-        tabs!!.addTab(tabs!!.newTab().setText("Todos"))
-        tabs!!.addTab(tabs!!.newTab().setText("Nuevos"))
-        tabs!!.addTab(tabs!!.newTab().setText("Leidos"))
-        tabs!!.tabMode = TabLayout.MODE_SCROLLABLE
-        tabs!!.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+        tabs.addTab(tabs.newTab().setText("Todos")) // tabs!!.addTab(tabs!!.newTab().setText("Todos"))
+        tabs.addTab(tabs.newTab().setText("Nuevos")) // tabs!!.addTab(tabs!!.newTab().setText("Nuevos"))
+        tabs.addTab(tabs.newTab().setText("Leidos")) // tabs!!.addTab(tabs!!.newTab().setText("Leidos"))
+        tabs.tabMode = TabLayout.MODE_SCROLLABLE // tabs!!.tabMode = TabLayout.MODE_SCROLLABLE
+        tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener { // tabs!!...
             override fun onTabSelected(tab: TabLayout.Tab) {
                 when (tab.position) {
                     0 //Todos
                     -> {
-                        adaptador!!.setNovedad(false)
-                        adaptador!!.setLeido(false)
+                        adaptador?.setNovedad(false) // adaptador!!.setNovedad(false)
+                        adaptador?.setLeido(false) // adaptador!!.setLeido(false)
                     }
                     1 //Nuevos
                     -> {
-                        adaptador!!.setNovedad(true)
-                        adaptador!!.setLeido(false)
+                        adaptador?.setNovedad(true) // adaptador!!.setNovedad(true)
+                        adaptador?.setLeido(false) // adaptador!!.setLeido(false)
                     }
                     2 //Leidos
                     -> {
-                        adaptador!!.setNovedad(false)
-                        adaptador!!.setLeido(true)
+                        adaptador?.setNovedad(false) // adaptador!!.setNovedad(false)
+                        adaptador?.setLeido(true) // adaptador!!.setLeido(true)
                     }
                 }
-                adaptador!!.notifyDataSetChanged()
+                adaptador?.notifyDataSetChanged() // adaptador!!.notifyDataSetChanged()
             }
             override fun onTabUnselected(tab: TabLayout.Tab) {}
             override fun onTabReselected(tab: TabLayout.Tab) {}
@@ -94,9 +94,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         // Navigation Drawer
 //        drawer = findViewById<View>(R.id.drawer_layout) as DrawerLayout
         toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.drawer_open, R.string.drawer_close)
-        drawer_layout!!.addDrawerListener(toggle!!)
-        toggle!!.syncState()
-        toggle!!.toolbarNavigationClickListener = View.OnClickListener { onBackPressed() }
+        drawer_layout.addDrawerListener(toggle) // drawer_layout!!.addDrawerListener(toggle!!)
+        toggle.syncState()
+        toggle.toolbarNavigationClickListener = View.OnClickListener { onBackPressed() }
 //        val navigationView = findViewById<View>(R.id.nav_view) as NavigationView
         nav_view.setNavigationItemSelectedListener(this)
 
@@ -185,20 +185,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 //        }
         when(id) {
             R.id.nav_todos -> {
-                adaptador!!.setGenero("")
-                adaptador!!.notifyDataSetChanged()
+                adaptador?.setGenero("") // adaptador!!.setGenero("")
+                adaptador?.notifyDataSetChanged() // adaptador!!.notifyDataSetChanged()
             }
             R.id.nav_epico -> {
-                adaptador!!.setGenero(G_EPICO)
-                adaptador!!.notifyDataSetChanged()
+                adaptador?.setGenero(G_EPICO) // adaptador!!.setGenero(G_EPICO)
+                adaptador?.notifyDataSetChanged() // adaptador!!.notifyDataSetChanged()
             }
             R.id.nav_XIX -> {
-                adaptador!!.setGenero(G_S_XIX)
-                adaptador!!.notifyDataSetChanged()
+                adaptador?.setGenero(G_S_XIX) // adaptador!!.setGenero(G_S_XIX)
+                adaptador?.notifyDataSetChanged() // adaptador!!.notifyDataSetChanged()
             }
             R.id.nav_suspense -> {
-                adaptador!!.setGenero(G_SUSPENSE)
-                adaptador!!.notifyDataSetChanged()
+                adaptador?.setGenero(G_SUSPENSE) // adaptador!!.setGenero(G_SUSPENSE)
+                adaptador?.notifyDataSetChanged() // adaptador!!.notifyDataSetChanged()
             }
         }
 
@@ -217,14 +217,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     fun mostrarElementos(mostrar: Boolean) {
-        appBarLayout!!.setExpanded(mostrar)
-        toggle!!.isDrawerIndicatorEnabled = mostrar
+        appBarLayout.setExpanded(mostrar) // appBarLayout!!.setExpanded(mostrar)
+        toggle.isDrawerIndicatorEnabled = mostrar // toggle!!.isDrawerIndicatorEnabled = mostrar
         if (mostrar) {
-            drawer_layout!!.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-            tabs!!.visibility = View.VISIBLE
+            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED) // drawer_layout!!.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            tabs.visibility = View.VISIBLE // tabs!!.visibility = View.VISIBLE
         } else {
-            tabs!!.visibility = View.GONE
-            drawer_layout!!.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+            tabs.visibility = View.GONE // tabs!!.visibility = View.GONE
+            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED) // drawer_layout!!.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
         }
     }
 
