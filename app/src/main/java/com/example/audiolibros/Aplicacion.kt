@@ -12,9 +12,9 @@ import com.example.audiolibros.ejemploLibros
 
 class Aplicacion : Application() {
 
-    var listaLibros: List<Libro>? = null
+    var listaLibros: List<Libro>? = null // añado private
         private set
-    var adaptador: AdaptadorLibrosFiltro? = null
+    var adaptador: AdaptadorLibrosFiltro? = null // añado private
         private set
 
     override fun onCreate() {
@@ -24,14 +24,14 @@ class Aplicacion : Application() {
         colaPeticiones = Volley.newRequestQueue(this)
         lectorImagenes = ImageLoader(colaPeticiones,
                 object : ImageLoader.ImageCache {
-                    private val cache = LruCache<String, Bitmap>(10)
+                    private val cache = LruCache<String, Bitmap?>(10) // añado ?
 
                     override fun putBitmap(url: String, bitmap: Bitmap) {
-                        cache.put(url, bitmap)
+                        cache?.put(url, bitmap) // añado ?
                     }
 
-                    override fun getBitmap(url: String): Bitmap {
-                        return cache.get(url)
+                    override fun getBitmap(url: String): Bitmap? { // añado ?
+                        return cache?.get(url) // añado ?
                     }
                 })
     }

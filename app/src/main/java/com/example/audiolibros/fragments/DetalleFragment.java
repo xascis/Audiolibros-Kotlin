@@ -58,7 +58,7 @@ public class DetalleFragment extends Fragment implements
         //((ImageView) vista.findViewById(R.id.portada)).setImageResource(libro.recursoImagen);
         Aplicacion aplicacion = (Aplicacion) getActivity().getApplication();
         ((NetworkImageView) vista.findViewById(R.id.portada)).setImageUrl(
-                libro.getUrlImagen(),aplicacion.getLectorImagenes());
+                libro.getUrlImagen(),aplicacion.Companion.getLectorImagenes());
 
         vista.setOnTouchListener(this);
         if (mediaPlayer != null){
