@@ -16,6 +16,10 @@ class Aplicacion : Application() {
         private set
     var adaptador: AdaptadorLibrosFiltro? = null // añado private
         private set
+    var colaPeticiones: RequestQueue? = null
+        private set
+    var lectorImagenes: ImageLoader? = null
+        private set
 
     override fun onCreate() {
         super.onCreate()
@@ -36,10 +40,10 @@ class Aplicacion : Application() {
                 })
     }
 
-    companion object {
-        var colaPeticiones: RequestQueue? = null
-            private set
-        var lectorImagenes: ImageLoader? = null
-            private set
-    }
+//    companion object {
+//        var colaPeticiones: RequestQueue? = null
+//            private set
+//        var lectorImagenes: ImageLoader? = null
+//            private set
+//    }
 }

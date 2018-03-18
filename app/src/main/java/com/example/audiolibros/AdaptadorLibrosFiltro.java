@@ -2,6 +2,7 @@ package com.example.audiolibros;
 
 import android.content.Context;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
@@ -42,8 +43,8 @@ public class AdaptadorLibrosFiltro extends AdaptadorLibros {
     }
 
     public void recalculaFiltro() {
-        listaLibros = new Vector<>();
-        indiceFiltro = new Vector<>();
+        setListaLibros(new ArrayList<Libro>());
+        indiceFiltro = new ArrayList<Integer>();
         for (int i = 0; i < vectorSinFiltro.size(); i++) {
             Libro libro = vectorSinFiltro.get(i);
             if ((libro.getTitulo().toLowerCase().contains(busqueda) ||
@@ -51,7 +52,7 @@ public class AdaptadorLibrosFiltro extends AdaptadorLibros {
                     && (libro.getGenero().startsWith(genero))
                     && (!novedad || (novedad && libro.getNovedad()))
                     && (!leido || (leido && libro.getLeido()))) {
-                listaLibros.add(libro);
+                getListaLibros().add(libro);
                 indiceFiltro.add(i);
             }
         }
