@@ -34,7 +34,6 @@ open class AdaptadorLibros(
 
         init {
             portada = itemView.findViewById<View>(R.id.portada) as ImageView
-            //portada.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             titulo = itemView.findViewById<View>(R.id.titulo) as TextView
         }
     }
@@ -54,7 +53,7 @@ open class AdaptadorLibros(
         // holder.portada.setImageResource(libro.recursoImagen);
         holder.titulo.text = titulo
         val aplicacion = contexto.applicationContext as Aplicacion
-        aplicacion.lectorImagenes!!.get(urlImagen,
+        aplicacion.lectorImagenes?.get(urlImagen,
                 object : ImageLoader.ImageListener {
                     override fun onResponse(response: ImageLoader.ImageContainer, isImmediate: Boolean) {
                         val bitmap = response.bitmap
@@ -66,7 +65,6 @@ open class AdaptadorLibros(
                             val palette = Palette.from(bitmap).generate()
                             holder.itemView.setBackgroundColor(palette.getLightMutedColor(0))
                             holder.titulo.setBackgroundColor(palette.getLightVibrantColor(0))
-
                             holder.portada.invalidate()
                         }
 
@@ -80,9 +78,7 @@ open class AdaptadorLibros(
     }
 
     // Indicamos el número de elementos de la lista
-    override fun getItemCount(): Int {
-        return listaLibros.size
-    }
+    override fun getItemCount(): Int = listaLibros.size
 
     fun setOnItemClickListener(onClickListener: View.OnClickListener) {
         this.onClickListener = onClickListener

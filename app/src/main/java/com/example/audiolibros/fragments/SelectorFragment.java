@@ -33,14 +33,12 @@ public class SelectorFragment extends Fragment {
     private Activity actividad;
     private RecyclerView recyclerView;
     private AdaptadorLibrosFiltro adaptador;
-    //private Vector<Libro> vectorLibros;
 
     @Override public void onAttach(Activity actividad) {
         super.onAttach(actividad);
         this.actividad = actividad;
         Aplicacion app = (Aplicacion) actividad.getApplication();
         adaptador = app.getAdaptador();
-        //Vector<Libro> vectorLibros = app.getVectorLibros();
     }
 
     @Override public View onCreateView(LayoutInflater inflador, ViewGroup
@@ -69,7 +67,6 @@ public class SelectorFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int opcion) {
                         switch (opcion) {
                             case 0: //Compartir
-                                //Libro libro = vectorLibros.elementAt(id);
                                 Libro libro = adaptador.getItem(id); //Faltaba esta línea
                                 Intent i = new Intent(Intent.ACTION_SEND);
                                 i.setType("text/plain");
