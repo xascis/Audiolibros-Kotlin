@@ -27,11 +27,11 @@ class Aplicacion : Application() {
                     private val cache = LruCache<String, Bitmap?>(10) // añado ?
 
                     override fun putBitmap(url: String, bitmap: Bitmap) {
-                        cache?.put(url, bitmap) // añado ?
+                        cache.put(url, bitmap)
                     }
 
                     override fun getBitmap(url: String): Bitmap? { // añado ?
-                        return cache?.get(url) // añado ?
+                        return cache.get(url)
                     }
                 })
     }
