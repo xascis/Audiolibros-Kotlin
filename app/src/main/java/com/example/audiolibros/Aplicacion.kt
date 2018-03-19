@@ -12,7 +12,7 @@ import com.example.audiolibros.ejemploLibros
 
 class Aplicacion : Application() {
 
-    var listaLibros: List<Libro>? = null // añado private
+    lateinit var listaLibros: MutableList<Libro> // añado private
         private set
     var adaptador: AdaptadorLibrosFiltro? = null // añado private
         private set
@@ -23,7 +23,7 @@ class Aplicacion : Application() {
 
     override fun onCreate() {
         super.onCreate()
-        listaLibros = ejemploLibros()
+        listaLibros = ejemploLibros() as MutableList<Libro>
         adaptador = AdaptadorLibrosFiltro(this, listaLibros)
         colaPeticiones = Volley.newRequestQueue(this)
         lectorImagenes = ImageLoader(colaPeticiones,
