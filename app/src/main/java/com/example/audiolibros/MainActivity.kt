@@ -126,9 +126,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.menu_acerca -> {
                 val builder = AlertDialog.Builder(this)
-                builder.setMessage("Mensaje de Acerca De")
-                builder.setPositiveButton(android.R.string.ok, null)
-                builder.create().show()
+//                builder.setMessage("Mensaje de Acerca De")
+//                builder.setPositiveButton(android.R.string.ok, null)
+//                builder.create().show()
+                with(builder){
+                    setMessage("Mensaje de Acerca De")
+                    setPositiveButton(android.R.string.ok, null)
+                    create()
+                    show()
+                }
                 return true
             }
         }
@@ -145,10 +151,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             args.putInt(DetalleFragment.ARG_ID_LIBRO, id)
             nuevoFragment.arguments = args
             val transaccion = fragmentManager.beginTransaction()
-            transaccion.replace(R.id.contenedor_pequeno, nuevoFragment)
-            transaccion.addToBackStack(null)
-            transaccion.commit()
+//            transaccion.replace(R.id.contenedor_pequeno, nuevoFragment)
+//            transaccion.addToBackStack(null)
+//            transaccion.commit()
+            with(transaccion){
+                replace(R.id.contenedor_pequeno, nuevoFragment)
+                addToBackStack(null)
+                commit()
+            }
         }
+
 
         val pref = getSharedPreferences(
                 "com.example.audiolibros_internal", Context.MODE_PRIVATE)
