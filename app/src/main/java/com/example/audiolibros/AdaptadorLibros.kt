@@ -57,12 +57,13 @@ open class AdaptadorLibros(
                 object : ImageLoader.ImageListener {
                     override fun onResponse(response: ImageLoader.ImageContainer, isImmediate: Boolean) {
                         val bitmap = response.bitmap
-                        if (bitmap != null) {
+                        bitmap?.let {
+//                        if (bitmap != null) {
 
-                            holder.portada.setImageBitmap(bitmap)
+                            holder.portada.setImageBitmap(it)
 
                             //Extraemos el color principal de un bitmap
-                            val palette = Palette.from(bitmap).generate()
+                            val palette = Palette.from(it).generate()
                             holder.itemView.setBackgroundColor(palette.getLightMutedColor(0))
                             holder.titulo.setBackgroundColor(palette.getLightVibrantColor(0))
                             holder.portada.invalidate()

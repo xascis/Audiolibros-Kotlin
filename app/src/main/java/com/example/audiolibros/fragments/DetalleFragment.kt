@@ -45,7 +45,7 @@ class DetalleFragment : Fragment(), View.OnTouchListener, MediaPlayer.OnPrepared
         super.onResume()
     }
 
-    private fun ponInfoLibro(id: Int, vista: View?) {
+    fun ponInfoLibro(id: Int, vista: View? = view) {
         val (titulo, autor, urlImagen, urlAudio) = (activity.application as Aplicacion)
                 .listaLibros[id]
         (vista?.findViewById<View>(R.id.titulo) as TextView).text = titulo
@@ -73,9 +73,9 @@ class DetalleFragment : Fragment(), View.OnTouchListener, MediaPlayer.OnPrepared
 
     }
 
-    fun ponInfoLibro(id: Int) {
-        ponInfoLibro(id, view) // err: view must not be null
-    }
+//    fun ponInfoLibro(id: Int) {
+//        ponInfoLibro(id, view) // err: view must not be null
+//    }
 
     override fun onPrepared(mediaPlayer: MediaPlayer) {
         Log.d("Audiolibros", "Entramos en onPrepared de MediaPlayer")
@@ -113,14 +113,13 @@ class DetalleFragment : Fragment(), View.OnTouchListener, MediaPlayer.OnPrepared
 
     override fun getBufferPercentage(): Int = 0
 
-    override fun getCurrentPosition(): Int {
+    override fun getCurrentPosition(): Int =
         try {
-            return mediaPlayer!!.currentPosition
+            mediaPlayer!!.currentPosition
         } catch (e: Exception) {
-            return 0
+            0
         }
 
-    }
 
     override fun getDuration(): Int = mediaPlayer!!.duration
 
