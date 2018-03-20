@@ -39,8 +39,9 @@ class DetalleFragment : Fragment(), View.OnTouchListener, MediaPlayer.OnPrepared
     }
 
     override fun onResume() {
-//        val detalleFragment = fragmentManager.findFragmentById(R.id.detalle_fragment) as DetalleFragment
-        (activity as MainActivity).mostrarElementos(false)
+        val detalleFragment = fragmentManager.findFragmentById(R.id.detalle_fragment) as? DetalleFragment
+        if  (detalleFragment == null)
+            (activity as MainActivity).mostrarElementos(false)
         super.onResume()
     }
 
