@@ -148,7 +148,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         } else {
             val nuevoFragment = DetalleFragment()
             val args = Bundle()
-            args.putInt(DetalleFragment.ARG_ID_LIBRO, id)
+            args.putInt(DetalleFragment.Companion.ARG_ID_LIBRO, id)
             nuevoFragment.arguments = args
             val transaccion = fragmentManager.beginTransaction()
 //            transaccion.replace(R.id.contenedor_pequeno, nuevoFragment)

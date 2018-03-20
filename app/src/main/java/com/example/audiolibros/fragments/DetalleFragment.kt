@@ -25,7 +25,7 @@ class DetalleFragment : Fragment(), View.OnTouchListener, MediaPlayer.OnPrepared
     internal var mediaPlayer: MediaPlayer? = null
     internal lateinit var mediaController: MediaController
 
-    override fun onCreateView(inflador: LayoutInflater, contenedor: ViewGroup?, savedInstanceState: Bundle): View? {
+    override fun onCreateView(inflador: LayoutInflater, contenedor: ViewGroup?, savedInstanceState: Bundle?): View? {
         val vista = inflador.inflate(R.layout.fragment_detalle,
                 contenedor, false)
         val args = arguments
