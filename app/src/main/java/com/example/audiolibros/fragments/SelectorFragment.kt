@@ -132,11 +132,15 @@ class SelectorFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-        if (id == R.id.menu_ultimo) {
-            (actividad as MainActivity).irUltimoVisitado()
-            return true
-        } else if (id == R.id.menu_buscar) {
-            return true
+//        if (id == R.id.menu_ultimo) {
+//            (actividad as MainActivity).irUltimoVisitado()
+//            return true
+//        } else if (id == R.id.menu_buscar) {
+//            return true
+//    }
+        when(id){
+            R.id.menu_ultimo -> (actividad as MainActivity).irUltimoVisitado()
+            R.id.menu_buscar -> return true
         }
         return super.onOptionsItemSelected(item)
     }
