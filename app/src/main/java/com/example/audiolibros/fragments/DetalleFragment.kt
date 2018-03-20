@@ -23,7 +23,7 @@ import java.io.IOException
 
 class DetalleFragment : Fragment(), View.OnTouchListener, MediaPlayer.OnPreparedListener, MediaController.MediaPlayerControl {
     internal var mediaPlayer: MediaPlayer? = null
-    internal var mediaController: MediaController
+    internal lateinit var mediaController: MediaController
 
     override fun onCreateView(inflador: LayoutInflater, contenedor: ViewGroup?, savedInstanceState: Bundle): View? {
         val vista = inflador.inflate(R.layout.fragment_detalle,
@@ -39,10 +39,8 @@ class DetalleFragment : Fragment(), View.OnTouchListener, MediaPlayer.OnPrepared
     }
 
     override fun onResume() {
-        val detalleFragment = fragmentManager.findFragmentById(R.id.detalle_fragment) as DetalleFragment
-        if (detalleFragment == null) {
-            (activity as MainActivity).mostrarElementos(false)
-        }
+//        val detalleFragment = fragmentManager.findFragmentById(R.id.detalle_fragment) as DetalleFragment
+        (activity as MainActivity).mostrarElementos(false)
         super.onResume()
     }
 

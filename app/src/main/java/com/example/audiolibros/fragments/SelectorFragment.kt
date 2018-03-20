@@ -31,14 +31,14 @@ import java.util.Vector
 
 class SelectorFragment : Fragment() {
     private var actividad: Activity? = null
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var adaptador: AdaptadorLibrosFiltro
+    private var recyclerView: RecyclerView? = null
+    private var adaptador: AdaptadorLibrosFiltro? = null
 
     override fun onAttach(actividad: Activity) {
         super.onAttach(actividad)
         this.actividad = actividad
         val app = actividad.application as Aplicacion
-        adaptador = app.adaptador!!
+        adaptador = app.adaptador
     }
 
     override fun onCreateView(inflador: LayoutInflater, contenedor: ViewGroup?, savedInstanceState: Bundle): View? {
@@ -46,23 +46,23 @@ class SelectorFragment : Fragment() {
                 contenedor, false)
         recyclerView = vista.findViewById<View>(
                 R.id.recycler_view) as RecyclerView
-        recyclerView.layoutManager = GridLayoutManager(actividad, 2)
-        recyclerView.adapter = adaptador
-        adaptador.setOnItemClickListener(View.OnClickListener { v ->
+        recyclerView!!.layoutManager = GridLayoutManager(actividad, 2)
+        recyclerView!!.adapter = adaptador
+        adaptador!!.setOnItemClickListener(View.OnClickListener { v ->
             (actividad as MainActivity).mostrarDetalle(
-                    adaptador.getItemId(
-                            recyclerView.getChildAdapterPosition(v)).toInt())
+                    adaptador!!.getItemId(
+                            recyclerView!!.getChildAdapterPosition(v)).toInt())
         })
 
-        adaptador.setOnItemLongClickListener(View.OnLongClickListener { v ->
-            val id = recyclerView.getChildAdapterPosition(v)
+        adaptador!!.setOnItemLongClickListener(View.OnLongClickListener { v ->
+            val id = recyclerView!!.getChildAdapterPosition(v)
             val menu = AlertDialog.Builder(actividad)
             val opciones = arrayOf<CharSequence>("Compartir", "Borrar ", "Insertar")
             menu.setItems(opciones) { dialog, opcion ->
                 when (opcion) {
                     0 //Compartir
                     -> {
-                        val (titulo, _, _, urlAudio) = adaptador.getItem(id) //Faltaba esta línea
+                        val (titulo, _, _, urlAudio) = adaptador!!.getItem(id) //Faltaba esta línea
                         val i = Intent(Intent.ACTION_SEND)
                         i.type = "text/plain"
                         i.putExtra(Intent.EXTRA_SUBJECT, titulo)
@@ -72,15 +72,15 @@ class SelectorFragment : Fragment() {
                     1 //Borrar
                     -> Snackbar.make(v, "¿Estás seguro?", Snackbar.LENGTH_LONG)
                             .setAction("SI") {
-                                adaptador.borrar(id)
-                                adaptador.notifyDataSetChanged()
+                                adaptador!!.borrar(id)
+                                adaptador!!.notifyDataSetChanged()
                             }
                             .show()
                     2 //Insertar
                     -> {
-                        val posicion = recyclerView.getChildLayoutPosition(v)
-                        adaptador.insertar(adaptador.getItem(posicion))
-                        adaptador.notifyDataSetChanged()
+                        val posicion = recyclerView!!.getChildLayoutPosition(v)
+                        adaptador!!.insertar(adaptador!!.getItem(posicion))
+                        adaptador!!.notifyDataSetChanged()
                         Snackbar.make(v, "Libro insertado", Snackbar.LENGTH_INDEFINITE)
                                 .setAction("OK") { }
                                 .show()
@@ -106,8 +106,8 @@ class SelectorFragment : Fragment() {
         searchView.setOnQueryTextListener(
                 object : SearchView.OnQueryTextListener {
                     override fun onQueryTextChange(query: String): Boolean {
-                        adaptador.setBusqueda(query)
-                        adaptador.notifyDataSetChanged()
+                        adaptador!!.setBusqueda(query)
+                        adaptador!!.notifyDataSetChanged()
                         return false
                     }
 
@@ -118,8 +118,8 @@ class SelectorFragment : Fragment() {
         MenuItemCompat.setOnActionExpandListener(searchItem,
                 object : MenuItemCompat.OnActionExpandListener {
                     override fun onMenuItemActionCollapse(item: MenuItem): Boolean {
-                        adaptador.setBusqueda("")
-                        adaptador.notifyDataSetChanged()
+                        adaptador!!.setBusqueda("")
+                        adaptador!!.notifyDataSetChanged()
                         return true  // Para permitir cierre
                     }
 
@@ -132,15 +132,11 @@ class SelectorFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         val id = item.itemId
-//        if (id == R.id.menu_ultimo) {
-//            (actividad as MainActivity).irUltimoVisitado()
-//            return true
-//        } else if (id == R.id.menu_buscar) {
-//            return true
-//        }
-        when(id){
-            R.id.menu_ultimo -> (actividad as MainActivity).irUltimoVisitado()
-            R.id.menu_buscar -> return true
+        if (id == R.id.menu_ultimo) {
+            (actividad as MainActivity).irUltimoVisitado()
+            return true
+        } else if (id == R.id.menu_buscar) {
+            return true
         }
         return super.onOptionsItemSelected(item)
     }
